@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt8lt72wtouyx"]
+
+[ext_resource type="PackedScene" uid="uid://btytku3eelnpu" path="res://characters/player/player.tscn" id="1_8jkus"]
+[ext_resource type="PackedScene" uid="uid://igwy5af12raw" path="res://maps/salakyan.tscn" id="2_jurl8"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_qd2i3"]
+size = Vector2(1000, 1000)
+
+[node name="test_map2" type="Node2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+self_modulate = Color(0.157311, 0.373861, 9.62615e-08, 1)
+z_index = -1
+position = Vector2(-128, -127)
+scale = Vector2(2.373, 1.552)
+mesh = SubResource("QuadMesh_qd2i3")
+
+[node name="salakyan" parent="." instance=ExtResource("2_jurl8")]
+position = Vector2(-342, -190)
+
+[node name="player" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("1_8jkus")]
+position = Vector2(-182, -168)
+scale = Vector2(0.6, 0.6)
+new_loc = Vector2(-182, -168)
+initial_state = NodePath("states/idle")

@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://btytku3eelnpu"]
+
+[ext_resource type="Script" path="res://characters/player/player.gd" id="1_lpag8"]
+[ext_resource type="Texture2D" uid="uid://chsc6h68808xj" path="res://icon.svg" id="2_6xtuh"]
+[ext_resource type="Script" path="res://characters/player/states_scripts/states.gd" id="3_45ltj"]
+[ext_resource type="Script" path="res://characters/player/states_scripts/movements.gd" id="4_3o2qr"]
+[ext_resource type="Script" path="res://characters/player/states_scripts/idle.gd" id="5_wb76q"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_yda0m"]
+center_offset = Vector3(-0.5, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pye28"]
+size = Vector2(128, 128)
+
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_lpag8")
+new_loc = Vector2(-992, -178)
+initial_state = NodePath("states/idle")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6xtuh")
+
+[node name="wand" type="MeshInstance2D" parent="Sprite2D"]
+visible = false
+z_index = -1
+scale = Vector2(-238.81, 30.2635)
+mesh = SubResource("QuadMesh_yda0m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pye28")
+
+[node name="states" type="Node" parent="."]
+script = ExtResource("3_45ltj")
+
+[node name="movements" type="Node" parent="states" node_paths=PackedStringArray("player")]
+script = ExtResource("4_3o2qr")
+player = NodePath("../..")
+
+[node name="idle" type="Node" parent="states"]
+script = ExtResource("5_wb76q")
+
+[node name="camera holder" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="camera holder"]
+zoom = Vector2(0.8, 0.8)
+process_callback = 0
+position_smoothing_enabled = true
+
+[node name="minimap" type="Node2D" parent="."]
