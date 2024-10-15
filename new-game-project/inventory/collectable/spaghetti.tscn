@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://crbn2r8p5fbvo"]
+
+[ext_resource type="Script" path="res://inventory/collectable/spaghetti.gd" id="1_li5sa"]
+[ext_resource type="Resource" uid="uid://plqicdjvj27s" path="res://inventory/items/spaghetti.tres" id="2_v4j5i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_66vsp"]
+radius = 30.0
+
+[node name="Spaghetti" type="Node2D"]
+script = ExtResource("1_li5sa")
+item = ExtResource("2_v4j5i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_66vsp")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

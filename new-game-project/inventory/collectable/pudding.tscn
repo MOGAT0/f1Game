@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcl0os4jkpj8k"]
+
+[ext_resource type="Script" path="res://inventory/collectable/pudding.gd" id="1_12qu0"]
+[ext_resource type="Resource" uid="uid://brjce5inq5udk" path="res://inventory/items/pudding.tres" id="2_g1133"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4rcev"]
+radius = 30.0
+
+[node name="Pudding" type="Node2D"]
+script = ExtResource("1_12qu0")
+item = ExtResource("2_g1133")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_4rcev")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

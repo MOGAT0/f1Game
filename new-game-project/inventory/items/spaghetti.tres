@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Items" load_steps=3 format=3 uid="uid://plqicdjvj27s"]
+
+[ext_resource type="Texture2D" uid="uid://qdv6c1k7u5u3" path="res://assets/icons/94_spaghetti.png" id="1_mtmhs"]
+[ext_resource type="Script" path="res://inventory/items.gd" id="2_bft53"]
+
+[resource]
+script = ExtResource("2_bft53")
+name = "spaghetti"
+icon = ExtResource("1_mtmhs")
