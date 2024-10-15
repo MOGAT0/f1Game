@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://igwy5af12raw"]
+
+[ext_resource type="Script" path="res://assets/scripts/travel.gd" id="1_y18ed"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5k5yn"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pe4ls"]
+size = Vector2(100, 100)
+
+[sub_resource type="QuadMesh" id="QuadMesh_yjtdb"]
+size = Vector2(550, 550)
+
+[node name="salakyan" type="Node2D"]
+script = ExtResource("1_y18ed")
+locations = ["res://maps/test_map.tscn", "res://maps/test_map_2.tscn"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+mesh = SubResource("QuadMesh_5k5yn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_pe4ls")
+
+[node name="Control" type="Control" parent="."]
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_left = -115.0
+offset_top = -121.0
+offset_right = 118.0
+offset_bottom = 1.0
+
+[node name="tricyce" type="Button" parent="Control"]
+layout_mode = 1
+offset_left = -28.0
+offset_right = 58.0
+offset_bottom = 54.0
+text = "Tricycle
+(15 Pesos)"
+
+[node name="jeep" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -4.0
+offset_right = 4.0
+offset_bottom = 8.0
+grow_horizontal = 2
+text = "Jeep
+(11 Pesos)"
+
+[node name="bus" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -51.0
+offset_right = 35.0
+offset_bottom = 54.0
+grow_horizontal = 0
+text = "Bus
+(12 Pesos)"
+
+[node name="world_map" type="Node2D" parent="."]
+visible = false
+z_index = 2
+
+[node name="map" type="MeshInstance2D" parent="world_map"]
+self_modulate = Color(0.526704, 0.420747, 0.246733, 1)
+mesh = SubResource("QuadMesh_yjtdb")
+
+[node name="Control" type="Control" parent="world_map/map"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+
+[node name="location1" type="Button" parent="world_map/map/Control"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 25
+text = "Location 1"
+
+[node name="location2" type="Button" parent="world_map/map/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -66.5
+offset_right = 83.5
+offset_bottom = 150.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 25
+text = "Location 2"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="world_map/map/Control/location1" to="." method="_on_location_1_pressed"]
+[connection signal="pressed" from="world_map/map/Control/location2" to="." method="_on_location_2_pressed"]

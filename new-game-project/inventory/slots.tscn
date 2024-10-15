@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3 uid="uid://oiiihvh6u6ap"]
+
+[ext_resource type="Texture2D" uid="uid://b6yr5hq2wuebn" path="res://assets/icons/Inventory_Slot.png" id="1_fc3gm"]
+[ext_resource type="Script" path="res://inventory/slots.gd" id="1_lej2g"]
+[ext_resource type="FontFile" uid="uid://dlsimalgpdjbo" path="res://assets/fonts/pixlkrud.ttf" id="3_e1bqw"]
+
+[node name="slots" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(120, 120)
+offset_right = 120.0
+offset_bottom = 120.0
+script = ExtResource("1_lej2g")
+
+[node name="texture" type="Sprite2D" parent="."]
+position = Vector2(9, 9)
+scale = Vector2(5, 5)
+texture = ExtResource("1_fc3gm")
+centered = false
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="item_icon" type="Sprite2D" parent="CenterContainer/Panel"]
+scale = Vector2(2, 2)
+
+[node name="Label" type="Label" parent="CenterContainer/Panel"]
+custom_minimum_size = Vector2(36, 32)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 12.0
+offset_right = 40.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(0.4375, 0.266602, 0, 1)
+theme_override_colors/font_outline_color = Color(0.506789, 0.483365, 0.483365, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_e1bqw")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 2
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(101, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -51.0
+offset_right = 49.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="actions" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = -53.0
+offset_right = 150.0
+offset_bottom = 7.0
+grow_horizontal = 2
+
+[node name="drop" type="Button" parent="actions"]
+custom_minimum_size = Vector2(140, 60)
+layout_mode = 1
+offset_right = 140.0
+offset_bottom = 60.0
+text = "Delete"
+
+[node name="use" type="Button" parent="actions"]
+custom_minimum_size = Vector2(140, 60)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_bottom = 60.0
+grow_horizontal = 0
+text = "Use"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="actions/drop" to="." method="_on_drop_pressed"]
